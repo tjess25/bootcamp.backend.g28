@@ -35,21 +35,23 @@ const createHtml = ()=>{
 }
 
 const doesItExist = (type) =>{
-    return fs.readdir(`.`,
+    return new Promise((resolve, reject) => {
+        fs.readdir(`.`,
     { withFileTypes: false },
     (err, files) => {
         console.log("\nCurrent directory files:");
         if (err) //{throw err}
-            console.log(err);
+           reject(err);
         else {
             files.forEach(file => {
                 if(file === type){
-                    return true
+                    resolve(true);
                 }
             })
-            return false;
+            resolve(false);
         }
     })
+    }) 
 }
 
 const createJs = ()=>{
