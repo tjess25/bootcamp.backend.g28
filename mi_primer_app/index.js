@@ -1,40 +1,32 @@
 const express = require('express')
 const app = express()
 const port = 3000
-
-//hi
-
-app.use((req, res, next) => {
-    console.log("Este es un middleware")
-    next()
-})
+const apiRoutes = require('./routes/index')
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+/*app.use((req, res, next) => {
+    //const { isAdmin, msg }  = req.body
+    const isAdmin = req.body.isAdmin
+    const msg = req.body.msg
+    console.log(isAdmin);
+    console.log("msg", msg);
+    if (isAdmin) {
+        next()
+    } else {
+        res.status(403).send({
+            msg: "User not admin",
+        })
+    }    
+})*/
+
 app.get('/', (req, res) => {
-  res.status(200).send('ok')
+    res.status(200).send('ok')
 })
 
-app.get('/hi', (req, res) => {
-    res.send('Hi!')
-})
+app.use(apiRoutes)
 
-app.post('/', (req, res) => {
-    console.log(req.body);
-    res.status(201).send("POST")
-})
-
-app.put('/:id', (req, res) => {
-    console.log(req.params.id);
-    console.log(req.body)
-    res.status(201).send("PUT")
-})
-
-app.delete('/:id', (req, res) => {
-    console.log(req.params.id);
-    res.status(200).send("DELETE")
-})
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
