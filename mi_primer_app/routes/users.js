@@ -1,28 +1,14 @@
 const express = require('express')
 const router = express.Router()
-
-router.use((req, res, next) => {
-    //const { isAdmin, msg }  = req.body
-    const isAdmin = req.body.isAdmin
-    const msg = req.body.msg
-    console.log(isAdmin);
-    console.log("msg", msg);
-    if (isAdmin) {
-        next()
-    } else {
-        res.status(403).send({
-            msg: "User not admin",
-        })
-    }    
-})
-
-router.get('/', (req, res) => {
-    res.status(200).send('users')
-})
+const userMiddleware = require('../middlewares/users')
+const usersController = require('../controllers/users')
 
 
-router.post('/', (req, res) => {
-    res.status(200).send('users')
-})
+router.get('/', usersController.get)
+
+//router.use(userMiddleware.isAdmin)
+router.post('/', usersController.post)
+router.put('/:id', usersController.put)
+router.delete('/:id', [userMiddleware.isAdmin, userMiddleware.itsMe], usersController.delete)
 
 module.exports = router;
