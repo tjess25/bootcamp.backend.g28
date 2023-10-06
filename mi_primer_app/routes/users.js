@@ -19,7 +19,7 @@ const usersController = require('../controllers/users')
  *          200:
  *              description: user data in json and status message
  *              content:
- *                  applications/json:
+ *                  application/json:
  *                      schema:
  *                          type: object
  *                          properties:
@@ -49,7 +49,7 @@ router.get('/:id', usersController.get)
  *          200:
  *              description: user data in json and status message
  *              content:
- *                  applications/json:
+ *                  application/json:
  *                      schema:
  *                          type: object
  *                          properties:
@@ -73,6 +73,51 @@ router.delete('/:id', [userMiddleware.itsMe, userMiddleware.isAdmin], usersContr
 router.use(userMiddleware.isAdmin)
 
 router.post('/', usersController.post)
+
+/**
+ * @swagger
+ * /users/{id}:
+ *  put:
+ *      summary: update a user by id
+ *      tags:
+ *          - users
+ *      description: update a user by id
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          required: true
+ *      requestBody:
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      properties:
+ *                          isAdmin:
+ *                              type: boolean
+ *                              example: false
+ *                          itsMe:
+ *                              type: boolean
+ *                              example: true
+ *      responses:
+ *          201:
+ *              description: user data in json and status message
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              data:
+ *                                  type: object
+ *                                  properties:
+ *                                      id:
+ *                                          type: string
+ *                                          example: "nwie78whjb"
+ *                              msg:
+ *                                  type: string
+ *                                  example: "update success"
+ *          404:
+ *              description: not found
+ */
 router.put('/:id', usersController.put)
 
 
