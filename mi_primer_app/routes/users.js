@@ -11,6 +11,10 @@ const usersController = require('../controllers/users')
  *      tags:
  *          - users
  *      description: get a user by id
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          required: true
  *      responses:
  *          200:
  *              description: user data in json and status message
