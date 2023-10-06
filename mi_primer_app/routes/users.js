@@ -4,11 +4,16 @@ const userMiddleware = require('../middlewares/users')
 const usersController = require('../controllers/users')
 
 
-router.get('/', usersController.get)
+router.get('/:id', usersController.get)
+router.get('/getAll', usersController.getAll)
 
-//router.use(userMiddleware.isAdmin)
+router.delete('/:id', [userMiddleware.itsMe, userMiddleware.isAdmin], usersController.delete)
+
+//router.use(userMiddleware.itsMe)
+router.use(userMiddleware.isAdmin)
+
 router.post('/', usersController.post)
 router.put('/:id', usersController.put)
-router.delete('/:id', [userMiddleware.isAdmin, userMiddleware.itsMe], usersController.delete)
+
 
 module.exports = router;

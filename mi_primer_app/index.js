@@ -1,10 +1,17 @@
 const express = require('express')
+const swaggerJsDoc = require('swagger-jsdoc')
+const swaggerUI = require('swagger-ui-express')
 const app = express()
 const port = 3000
 const apiRoutes = require('./routes/index')
+const docs = require('./doc/index')
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+const swaggerSpec = swaggerJsDoc(docs)
+app.use('/api-doc', swaggerUI.serve, swaggerUI.setup(swaggerSpec))
+
 
 app.get('/', (req, res) => {
     res.status(200).send('ok')

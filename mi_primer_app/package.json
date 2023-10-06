@@ -4,6 +4,7 @@
   "description": "esta es mi primer aplicacion usando express",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon --watch . ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,6 +18,11 @@
   },
   "homepage": "https://github.com/tjess25/bootcamp.backend.g28#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }
