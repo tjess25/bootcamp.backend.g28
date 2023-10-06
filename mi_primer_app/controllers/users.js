@@ -2,7 +2,7 @@ module.exports = {
 
     get: async function name(req, res) {
         //users.findById(req.param.id)
-        res.status(200).send({msg: "user"})
+        res.status(200).send({msg: "user", data: { id: "ibgheu"}})
     },
     getAll: async function name(req, res) {
         res.status(200).send({msg: "users", data: ['user1', 'user2']})
