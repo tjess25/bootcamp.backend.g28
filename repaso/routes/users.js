@@ -39,7 +39,7 @@ const userController = require('../controllers/users')
  *                              type: string
  *                              example: fZ3<GcSf55%2rMT
  *      responses:
- *          201:
+ *          200:
  *              description: user data in json and status message
  *              content:
  *                  application/json:
@@ -97,6 +97,9 @@ const userController = require('../controllers/users')
  *                                  type: string
  *                                  example: message error
  */
-router.put('/:id', userController.put)
+//router.put('/:id', userController.put)
+
+router.get('/', userController.get)
+router.get('/:id', userController.getById)
 
 module.exports = router
