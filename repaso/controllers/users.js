@@ -16,6 +16,28 @@ module.exports = {
         //let user = await Users.findOne({first_name: id})
         res.status(200).send({msg: "sucess", data: user})
     },
+    post: async (req, res) => {
+        req.body.password = await Users.encrypPassword(req.body.password)
+        let user = await Users.create(req.body)
+        if (!user) {
+            res.status(502).send({msg: "user not created", err: user})
+        }
+        await user.save()
+
+        res.status(201).send({msg: "user created", data: user})
+    },
+    login: async (req, res) => {
+        const {email, password} = req.body
+        let user = await Users.findOne({email: email})
+        if (!user) {
+            return res.status(404).send({msg: "user not found"})
+        }
+        let validPass = await Users.comparePassword(password, user.password)
+        if (!validPass) {
+            return res.status(401).send({msg: "Incorrect password"})
+        }
+        return res.status(200).send({msg: "success", data: user})
+    }
     /*put: (req, res) => {
         let id = req.params.id
 
