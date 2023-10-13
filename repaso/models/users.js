@@ -1,11 +1,3 @@
-/**
- * "first_name": "Thaine",
-        "last_name": "Draper",
-        "email": "tdraper0@bloglovin.com",
-        "gender": "Male",
-        "password": "nB1)gTXtpn9"
- */
-
 const { Schema, model } = require('mongoose')
 const bcrypt = require('bcrypt')
 const uniqueValidatior = require('mongoose-unique-validator')
