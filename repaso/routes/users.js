@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const userController = require('../controllers/users')
+const auth = require('../middlewares/auth')
 
 /**
  * @swagger
@@ -144,26 +145,7 @@ router.get('/:id', userController.getById)
  *          content:
  *              application/json:
  *                  schema:
- *                      type: object
- *                      properties:
- *                          firstName:
- *                              type: string
- *                              example: Name
- *                          lastName:
- *                              type: string
- *                              example: lastName
- *                          email:
- *                              type: string
- *                              example: email@mail.com
- *                          gender:
- *                              type: string
- *                              example: Male
- *                          password:
- *                              type: string
- *                              example: 87yhu67g49
- *                          dateBirth:
- *                              type: date
- *                              example: 2002-03-15
+ *                    $ref: '#/components/schemas/userBody'  
  *      responses:
  *          201:
  *              descripton: return a message and data user
@@ -176,33 +158,11 @@ router.get('/:id', userController.getById)
  *                                  type: string
  *                                  example: user created
  *                              data:
- *                                  type: object
- *                                  properties:
- *                                      _id:
- *                                          type: string
- *                                          example: 65274a33d295b771ca680f9b
- *                                      firstName:
- *                                          type: string
- *                                          example: Name
- *                                      lastName:
- *                                          type: string
- *                                          example: lastName
- *                                      email:
- *                                          type: string
- *                                          example: email@mail.com
- *                                      gender:
- *                                          type: string
- *                                          example: Male
- *                                      password:
- *                                          type: string
- *                                          example: 87yhu67g49
- *                                      dateBirth:
- *                                          type: date
- *                                          example: 15/03/2000
+ *                                  $ref: '#/components/schemas/user'
  * 
  *
  */
-router.post('/', userController.post)
+router.post('/', [auth.authToken, auth.isAdmin], userController.post)
 
 router.post('/login', userController.login)
 

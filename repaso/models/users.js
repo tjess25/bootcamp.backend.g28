@@ -23,6 +23,12 @@ const userSchema = new Schema({
             message: '{VALUE} is not a valid gender'
           }
     },
+    role: {
+        type: String,
+        enum: {
+            values: ['Admin','Seller', 'Buyer']
+        }
+    },
     password: {
         type: String,
         required: true

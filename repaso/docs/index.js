@@ -6,7 +6,8 @@ const urls = require('./urls')
 module.exports = {
     swaggerDefinition: {
        ...basic,
-       ...servers
+       ...servers,
+       ...components
     },
     apis: urls
 }
